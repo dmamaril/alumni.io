@@ -1,0 +1,31 @@
+<link rel='stylesheet' href='../css/styles.css'/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pr-wrap">
+                <div class="pass-reset">
+                    <input type="email" placeholder="Email" />
+                    <input type="submit" value="Submit" class="pass-reset-submit btn btn-success btn-sm" />
+                </div>
+            </div>
+            <div class="wrap">
+                <p class="form-title">
+                   <small> Welcome, </small>{{ userName }} </p>
+                <form class="login" ng-submit='signUpUser()'>
+                <input type="text" ng-model='userName' placeholder="Username" />
+                <input type="password" placeholder="Password" />
+                <input type="text" placeholder="email" />
+                <input type="submit" value="Sign Up" class="btn btn-default btn-sm" />
+
+                        <!-- add forgot password feature
+                        <div class="col-md-6 forgot-pass-content">
+                            <a href="javascription:void(0)" class="forgot-pass">Forgot Password</a>
+                        </div> -->
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
