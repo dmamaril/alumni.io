@@ -2,9 +2,12 @@ var mongoose = require('mongoose');
 var express = require('express');
 var partials = require('express-partials');
 var requestHandler = require('./requestHandler');
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
+
 
 // ***** SETUP MONGOOSE DATABASE ***** //
-mongoose.connect('mongodb://localhost/test'); // sign up for mongolabs in azure
+mongoose.connect('mongodb://localhost/alumnio'); // sign up for mongolabs in azure
 var db = mongoose.connection
   .on('error', console.error.bind(console, 'connection error:'))
   .once('open', function () { console.log ('MongoDB initialized!'); });
@@ -14,7 +17,8 @@ var db = mongoose.connection
 var app = express()
 // app.configure(function () {
     .use(partials())
-    // .use(express.bodyParser());
+    .use(bodyParser())
+    .use(morgan('dev')) // logs requests to server
     // .set('view engine', 'ejs')
     .use(express.static(__dirname + '/client'))
   // });
@@ -24,7 +28,7 @@ var app = express()
   .post('/login', requestHandler.logInUser)
   
   // .get('/signup', requestHandler.renderSignUp)
-  // .post('/signup', requestHandler.signUpUser)
+  .post('/signup', requestHandler.signUpUser)
   
   .get('/users', requestHandler.fetchUsers)
   .post('/users', requestHandler.saveUser);

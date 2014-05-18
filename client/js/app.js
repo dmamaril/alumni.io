@@ -28,18 +28,36 @@ var app = angular.module('alumnio', ['ngRoute'])
   })
 
   .controller('loginController', function ($scope, hrFactory) {
+    $scope.logInUser = function () {
+      hrFactory.post({ username: $scope.username, password: $scope.password }, '/login')
+        .success(function () {
+          console.log('User authorized. Redirecting to main page!');
+          hrFactory.get('/');
+        })
+        .error(function () {
+          console.log ('Err @ app.js 40 :: User was not authorized.');
+        });
+    };
   })
 
   .controller('signUpController', function ($scope, hrFactory) {
-
+    $scope.signUpUser = function () {
+      hrFactory.post({ username: $scope.username, password: $scope.password, email: $scope.email }, '/signup')
+        .success(function () {
+          console.log ('Sign Up Success!');
+        })
+        .error(function () {
+          console.log ('Err @ line 50 app.js :: Sign up failed.');
+        })
+    }
   })
 
   .controller('logOutController')
 
   .factory('hrFactory', function ($http) {
     return {
-      get: function () {
-        return $http.get('/users')
+      get: function (path) {
+        return $http.get(path)
           .success(function (userData) {
             return userData;
           })
@@ -47,8 +65,9 @@ var app = angular.module('alumnio', ['ngRoute'])
             throw 'Err @ app.js 47';
           });
       },
-      post: function (data) {
-        return $http.post('path', data)
+      post: function (data, path) {
+        console.log(data, path, 'Line 63 app.js');
+        return $http.post(path, data)
           .success(function () {
             console.log('User SignUp Success!');
           })
