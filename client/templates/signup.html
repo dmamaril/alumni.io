@@ -11,23 +11,42 @@
                 </div>
             </div> -->
 
-            <div class="wrap">
+            <div class="wrap" ng-show='!step2'>
                 <p class="form-title">
-                   <small> Welcome, </small>{{ username }} </p>
-                <form class="login" ng-submit='signUpUser()'>
-                <input type="text" ng-model='username' placeholder="Username" />
-                <input type="password" ng-model='password' placeholder="Password" />
+                   <small> Welcome, </small>{{ firstname }} </p>
+                <form class="login" ng-submit='step1Submit()'>
                 <input type="text" ng-model='email' placeholder="email" />
+                <input type="password" ng-model='password' placeholder="Password" />
+                <input type="text" ng-model='firstname' placeholder="forename" />
+                <input type="text" ng-model='lastname' placeholder="surname" />
                 <input type="submit" value="Sign Up" class="btn btn-default btn-sm" />
 
                         <!-- add forgot password feature
                         <div class="col-md-6 forgot-pass-content">
                             <a href="javascription:void(0)" class="forgot-pass">Forgot Password</a>
                         </div> -->
-                    </div>
-                </div>
                 </form>
             </div>
+
+
+            <div class="wrap" ng-show='step2'>
+                <p class="form-title">
+                   {{ firstname }}<small>, tell us a bit more about yourself</small> </p>
+                <form class="login" ng-submit='signUpUser()'> <!-- future implementation -->
+                <!-- <input type="text" ng-model='alumniOf' placeholder="Where did you graduate?" /> -->
+                <input type="text" ng-model='cohort' placeholder="Which cohort were you in?" />
+                <input type="text" ng-model='worksAt' placeholder="Where's your awesome job?" />
+                <input type="text" ng-model='linkedIn' placeholder="LinkedIn" />
+                <input type="text" ng-model='website' placeholder="Got a website?" />
+                <input type="submit" value="Sign Up" class="btn btn-default btn-sm" />
+                </form>
+            </div>
+
+
+
+
+
+
         </div>
     </div>
 </div>

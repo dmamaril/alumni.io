@@ -3,10 +3,10 @@ To Do:
 - angular 
   - FACTORY: setup get, post & delete requests
   - CONTROLLERS: setup login, setup & index ctrl
+  - resolve fetchData prior to loading in Divs
 
 - mongoose
   - create models for users
-  - create collection of users
 
 - requestHandler.js
   - handle post('/login')
@@ -20,6 +20,7 @@ To Do:
 
   - signup
     - save user to database & redirect to main.html
+    - on 'submit' run second half of sign up page
     ** on initial sign up, set up profile
       * add linkedIn, worksAt, alumniOf & site
 
@@ -31,6 +32,8 @@ Changelog:
 - Users.js
   - bcrypt user password prior to saving to database
   - comparePassword on login
+  - add 'fullname' to schema
+  - remove username // use e-mail as primary instead
 
 - server.js
   - added package.json file for node modules
@@ -40,6 +43,8 @@ Changelog:
   - completed get & post request
     - deleted delete request
     - redirects to main.html on success login
+    - require all info on signup
+    - renders users in dbs when redirected to '/main'
 
   - hrFactory
     - refractored to be more dynamic
@@ -48,11 +53,11 @@ Changelog:
   - loginUser && loginController
     - loginController now picks up view input
     - loginController now issues post requests to the server
-      - on submit() exports.logInUser is executed [not yet implemented]
+      - on submit() exports.logInUser is executed
     
 - requestHandler.js
   - add fetchUsers function using db.Users.find();
-
+  - set isSetUp on sign up
 
 
 05/17/2014

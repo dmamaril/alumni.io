@@ -12,10 +12,10 @@ exports.renderIndex = function (req, res) {
 };
 
 exports.logInUser = function (req, res) {
-  UserModel.findOne({username: req.body.username}, function (err, user) {
+  UserModel.findOne({email: req.body.email}, function (err, user) {
     if (user) {
       user.comparePassword(req.body.password, function (isMatch) {
-        if (isMatch) { res.send('hello') }
+        if (isMatch) { res.send(user) }
           else { console.log ('Incorrect Password'); }
       })
     } else if (err) { console.log ('Error @ Line 25 requestHandler.js')}
@@ -25,16 +25,21 @@ exports.logInUser = function (req, res) {
 exports.signUpUser = function (req, res) {
   console.log("In sign up user")
   
-  UserModel.findOne({username: req.body.username}, 'username', function (err, exists) {
+  UserModel.findOne({email: req.body.email}, 'email', function (err, exists) {
     if (!exists) {
-      var newUser = new UserModel ({
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email,
-        isSetUp: false
+      var newUser = new UserModel ({ 
+        email: req.body.email, 
+        password: req.body.password, 
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        cohort: req.body.cohort,
+        worksAt: req.body.worksAt,
+        linkedIn: req.body.linkedIn,
+        site: req.body.site
       });
       newUser.save(function (err, user){
-        console.log('saved ', user);
+        console.log('Saved ', user);
+        res.send('hiyooo')
       });      
     }
   });
@@ -42,8 +47,9 @@ exports.signUpUser = function (req, res) {
 };
 
 exports.fetchUsers = function (req, res) {
-  db.Users.find({}, function (err, data) {
-    res.send(200, data);
+  console.log('fetch users')
+  UserModel.find({}, function (err, users) {
+    res.send(users);
   });
 };
 

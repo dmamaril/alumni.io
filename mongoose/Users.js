@@ -5,14 +5,15 @@ var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
     id : Number,
-    username: String,
+    firstname: String,
+    lastname: String,
     password: String,
     email: String,
     linkedIn: String,
     worksAt: String,
     alumniOf: String,
-    site: String,
-    isSetUp: Boolean
+    cohort: Number,
+    site: String
   });
 
 userSchema.pre('save', function (next) {
