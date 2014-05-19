@@ -1,4 +1,4 @@
-To Do:
+***** TO DO ****** 
 
 - Index.html
   - navbar // header with logout?
@@ -12,10 +12,7 @@ To Do:
 - Signup.html
   - hide welcome until forename is form is complete
   - ngActive a thing? 
-
-- Send Message functionality
-  - wahooooaoohhh tough
-  - add an inbox Array [] to schema?
+  - company logos
 
 - ngAnimate
   - http://hendrixer.github.io/
@@ -29,8 +26,17 @@ To Do:
 ***** NIGHTMARE MODE *****
 - Passport Linked-In
   
+- Send Message functionality
+  - wahooooaoohhh tough
+  - add an inbox Array [] to schema?
 
-Changelog:
+
+
+***** CHANGE LOG ******
+
+5/19/2014
+  - signup.html
+    - basic template complete
 
 05/18/2014
 - Users.js
