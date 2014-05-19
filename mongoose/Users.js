@@ -11,7 +11,6 @@ var userSchema = mongoose.Schema({
     email: String,
     linkedIn: String,
     worksAt: String,
-    alumniOf: String,
     cohort: Number,
     site: String
   });

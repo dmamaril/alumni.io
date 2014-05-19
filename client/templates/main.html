@@ -1,2 +1,19 @@
-<h1> main </h1> 
-<div ng-repeat='user in users'>{{ user.lastname }}, {{ user.firstname }}</div>
+<link rel='stylesheet' href='../css/main.css'/>
+
+
+<div ng-repeat='user in users' class='mainView'>
+  
+  <div class='alumniWorksAt' style='padding-top: 30px'>
+  <p> {{ user.worksAt }} </p>
+ </div>
+
+  <div class='alumniView'>
+    <p> {{ user.lastname | capitalize }}, {{ user.firstname | capitalize }} </p>
+    <div><a ng-hide='{{user.site}}' href='http://{{user.site}}'>{{ user.site }}</a></div>
+    <div><a href='http://www.{{user.linkedIn}}'>{{user.linkedIn}}</a></div>
+    <hr>
+    <hr style="width: 1px; height: 20px; display: inline;"> 
+  </div>
+
+
+</div>
