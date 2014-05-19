@@ -27,12 +27,12 @@ var app = angular.module('alumnio', ['ngRoute'])
   .controller('mainController', function ($scope, hrFactory) {
   })
 
-  .controller('loginController', function ($scope, hrFactory) {
+  .controller('loginController', function ($scope, hrFactory, $location) {
     $scope.logInUser = function () {
       hrFactory.post({ username: $scope.username, password: $scope.password }, '/login')
         .success(function () {
           console.log('User authorized. Redirecting to main page!');
-          hrFactory.get('/');
+          $location.path('/')
         })
         .error(function () {
           console.log ('Err @ app.js 40 :: User was not authorized.');
@@ -42,7 +42,8 @@ var app = angular.module('alumnio', ['ngRoute'])
 
   .controller('signUpController', function ($scope, hrFactory) {
     $scope.signUpUser = function () {
-      hrFactory.post({ username: $scope.username, password: $scope.password, email: $scope.email }, '/signup')
+      var data = { username: $scope.username, password: $scope.password, email: $scope.email };
+      hrFactory.post(data, '/signup')
         .success(function () {
           console.log ('Sign Up Success!');
         })
@@ -66,10 +67,9 @@ var app = angular.module('alumnio', ['ngRoute'])
           });
       },
       post: function (data, path) {
-        console.log(data, path, 'Line 63 app.js');
         return $http.post(path, data)
-          .success(function () {
-            console.log('User SignUp Success!');
+          .success(function (err, user) {
+            console.log('Post Success!', user);
           })
           .error(function () {
             throw 'Err @ app.js 56';

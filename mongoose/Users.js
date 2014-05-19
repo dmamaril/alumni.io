@@ -14,11 +14,12 @@ var userSchema = mongoose.Schema({
     site: String
   });
 
-userSchema.pre('save', function () {
+userSchema.pre('save', function (next) {
   var cipher = Promise.promisify(bcrypt.hash);
   return cipher(this.password, null, null).bind(this)
     .then(function(hash) {
       this.set('password', hash);
+      next();
     });
 });
 

@@ -39,6 +39,7 @@ Changelog:
 - app.js
   - completed get & post request
     - deleted delete request
+    - redirects to main.html on success login
 
   - hrFactory
     - refractored to be more dynamic
