@@ -8,12 +8,17 @@
    </div>
 
     <div class='alumniView'>
-      <p> {{ user.lastname | capitalize }}, {{ user.firstname | capitalize }} </p>
+      <p> 
+      {{ user.lastname | capitalize }}, {{ user.firstname | capitalize }} 
+      <a class='glyphicon glyphicon-envelope' ng-click='sendMsg({ lastname: user.lastname, firstname: user.firstname})' ></a>
+      </p>
       <div><a ng-hide='{{user.site}}' href='http://{{user.site}}'>{{ user.site }}</a></div>
       <div><a href='http://www.{{user.linkedIn}}'>{{user.linkedIn}}</a></div>
       <hr>
       <hr style="width: 1px; height: 20px; display: inline;"> 
     </div>
   </div>
+
+
 
 </div>

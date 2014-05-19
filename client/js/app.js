@@ -27,8 +27,16 @@ var app = angular.module('alumnio', ['ngRoute'])
       .otherwise({ redirectTo: '/login' })
   }])
 
-  .controller('mainController', function ($scope, users) {
+  .controller('mainController', function ($scope, users, hrFactory) {
     $scope.users = users;
+
+    $scope.sendMsg = function (fullname) {
+
+      hrFactory.post(fullname, '/users')
+        .success(function () {
+          console.log('ok')
+        })
+    }
   })
 
   .controller('loginController', function ($scope, hrFactory, $location) {

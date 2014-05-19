@@ -51,3 +51,17 @@ exports.fetchUsers = function (req, res) {
     res.send(users);
   });
 };
+
+exports.addMessage = function (req, res) {
+  console.log(req.body);
+  UserModel.findOne({lastname: req.body.lastname, firstname: req.body.firstname}, function (err, user) {
+    if (user) {
+      UserModel.update({ _id: user._id }, 
+        {$push: { messages: 'hey man' } 
+      }, function (err, data) {});
+      console.log('User message inbox updated!')
+    }
+    else { console.log ('Error occurred. User not found. Line 58 requestHandler.js'); }
+  })
+  res.send('heheeheheh');
+}
