@@ -1,30 +1,34 @@
 To Do:
 
-- angular 
-  - FACTORY: setup get, post & delete requests
-  - CONTROLLERS: setup login, setup & index ctrl
-  - resolve fetchData prior to loading in Divs
+- Index.html
+  - navbar // header with logout?
 
-- mongoose
-  - create models for users
+- Main.html
+  - design divs to render out all the related user info
+    - set div height
+    - set autoscroll
+    - on click display others who may be in the same company
 
-- requestHandler.js
-  - handle post('/login')
-    - check database
-      - bcrypt + passwords ++ salt?
-    - redirect to main.html 
+- Signup.html
+  - hide welcome until forename is form is complete
+  - ngActive a thing? 
 
-- templates
-  - login
-    - handle 'remember me' requests
+- Send Message functionality
+  - wahooooaoohhh tough
+  - add an inbox Array [] to schema?
 
-  - signup
-    - save user to database & redirect to main.html
-    - on 'submit' run second half of sign up page
-    ** on initial sign up, set up profile
-      * add linkedIn, worksAt, alumniOf & site
+- ngAnimate
+  - http://hendrixer.github.io/
 
+- Session Tokens
+  - check for valid user token else relogin
 
+- logOutController
+  - is this needed? should just be a part of index.html
+
+***** NIGHTMARE MODE *****
+- Passport Linked-In
+  
 
 Changelog:
 
@@ -43,8 +47,9 @@ Changelog:
   - completed get & post request
     - deleted delete request
     - redirects to main.html on success login
-    - require all info on signup
-    - renders users in dbs when redirected to '/main'
+  - require all info on signup
+  - renders users in dbs when redirected to '/main'
+    - resolves $http.get request prior to rendering '/main'
 
   - hrFactory
     - refractored to be more dynamic

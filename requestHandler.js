@@ -23,8 +23,6 @@ exports.logInUser = function (req, res) {
 };
 
 exports.signUpUser = function (req, res) {
-  console.log("In sign up user")
-  
   UserModel.findOne({email: req.body.email}, 'email', function (err, exists) {
     if (!exists) {
       var newUser = new UserModel ({ 
@@ -38,12 +36,12 @@ exports.signUpUser = function (req, res) {
         site: req.body.site
       });
       newUser.save(function (err, user){
-        console.log('Saved ', user);
-        res.send('hiyooo')
+        console.log('Saving user...' );
+        console.log(user);
+        console.log('Saved!');
       });      
     }
   });
-
 };
 
 exports.fetchUsers = function (req, res) {
@@ -51,8 +49,4 @@ exports.fetchUsers = function (req, res) {
   UserModel.find({}, function (err, users) {
     res.send(users);
   });
-};
-
-exports.saveUser = function (req, res) {
-
 };

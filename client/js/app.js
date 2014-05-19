@@ -69,8 +69,8 @@ var app = angular.module('alumnio', ['ngRoute'])
         })
         .error(function () {
           console.log ('Err @ line 50 app.js :: Sign up failed.');
-        })
-    }
+        });
+    };
   })
 
   .controller('logOutController')
