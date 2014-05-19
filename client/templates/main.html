@@ -1,6 +1,6 @@
 <link rel='stylesheet' href='../css/main.css'/>
 
-<div class='mainView'>
+<div class='mainView' ng-init='sendForm = false'>
   <div ng-repeat='user in users'>
     
   <div class='alumniWorksAt' style='padding-top: 30px'>
@@ -10,7 +10,9 @@
     <div class='alumniView'>
       <p> 
       {{ user.lastname | capitalize }}, {{ user.firstname | capitalize }} 
-      <a class='glyphicon glyphicon-envelope' ng-click='sendMsg({ lastname: user.lastname, firstname: user.firstname})' ></a>
+      <!-- enable after templates are done
+      <a class='glyphicon glyphicon-envelope' ng-click='sendMsg({ lastname: user.lastname, firstname: user.firstname})' ></a> -->
+      <a class='glyphicon glyphicon-envelope' ng-click='userId = user._id'>{{ userId }}</a>
       </p>
       <div><a ng-hide='{{user.site}}' href='http://{{user.site}}'>{{ user.site }}</a></div>
       <div><a href='http://www.{{user.linkedIn}}'>{{user.linkedIn}}</a></div>
@@ -18,7 +20,19 @@
       <hr style="width: 1px; height: 20px; display: inline;"> 
     </div>
   </div>
+</div>
 
+  <div class="container">
 
-
+    <form role="form" style="width:400px; margin: 0 auto;">
+        <legend>Send Message</legend>
+        
+        <div class="required-field-block">
+            <textarea rows="5" class="form-control" placeholder="Message"></textarea>
+            <div class="required-icon">
+            </div>
+        </div>
+        
+        <button class="btn btn-primary">Send</button>
+    </form>
 </div>

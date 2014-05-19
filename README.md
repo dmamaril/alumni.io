@@ -4,14 +4,10 @@
   - navbar // header with logout?
 
 - Main.html
-  - design divs to render out all the related user info
-    - set div height
-    - set autoscroll
-    - on click display others who may be in the same company
+  - on click display others who may be in the same company
+  - render 'sendMessage' template when clicked on the envelope
 
 - Signup.html
-  - hide welcome until forename is form is complete
-  - ngActive a thing? 
   - company logos
 
 - ngAnimate
@@ -22,6 +18,7 @@
 
 - logOutController
   - is this needed? should just be a part of index.html
+
 
 ***** NIGHTMARE MODE *****
 - Passport Linked-In
@@ -37,6 +34,9 @@
 5/19/2014
   - signup.html
     - basic template complete
+
+  - Send Message
+    - backend working properly. Still need separate text view.
 
 05/18/2014
 - Users.js

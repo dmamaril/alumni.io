@@ -30,12 +30,18 @@ var app = angular.module('alumnio', ['ngRoute'])
   .controller('mainController', function ($scope, users, hrFactory) {
     $scope.users = users;
 
-    $scope.sendMsg = function (fullname) {
 
-      hrFactory.post(fullname, '/users')
+    // need to update passing in 'from' based on session tokens
+    $scope.sendMsg = function (msg) {
+      var message = {
+        _id: $scope.userId,
+        message: message
+      };
+
+      hrFactory.post(message, '/users')
         .success(function () {
-          console.log('ok')
-        })
+          console.log('Message Sent!');
+        });
     }
   })
 
