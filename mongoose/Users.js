@@ -11,7 +11,8 @@ var userSchema = mongoose.Schema({
     linkedIn: String,
     worksAt: String,
     alumniOf: String,
-    site: String
+    site: String,
+    isSetUp: Boolean
   });
 
 userSchema.pre('save', function (next) {

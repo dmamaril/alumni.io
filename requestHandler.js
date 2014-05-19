@@ -30,7 +30,8 @@ exports.signUpUser = function (req, res) {
       var newUser = new UserModel ({
         username: req.body.username,
         password: req.body.password,
-        email: req.body.email
+        email: req.body.email,
+        isSetUp: false
       });
       newUser.save(function (err, user){
         console.log('saved ', user);
