@@ -39,6 +39,7 @@ exports.signUpUser = function (req, res) {
         console.log('Saving user...' );
         console.log(user);
         console.log('Saved!');
+        res.send(user);
       });      
     }
   });

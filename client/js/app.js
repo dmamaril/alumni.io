@@ -61,7 +61,7 @@ var app = angular.module('alumnio', ['ngRoute'])
         linkedIn: $scope.linkedIn,
         site: $scope.site
       };
-
+      console.log(userData);
       hrFactory.post(userData, '/signup')
         .success(function () {
           console.log ('Sign Up Success!');

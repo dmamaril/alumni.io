@@ -12,6 +12,7 @@ var userSchema = mongoose.Schema({
     linkedIn: String,
     worksAt: String,
     cohort: Number,
+    messages: Array,
     site: String
   });
 
