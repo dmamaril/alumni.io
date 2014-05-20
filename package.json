@@ -11,7 +11,6 @@
     "mongoose": "^3.8.9",
     "express-jwt": "^0.2.1",
     "jsonwebtoken": "^0.4.0",
-    "moment": "^2.6.0",
-    "ng-time-relative": "^0.3.0"
+    "moment": "^2.6.0"
   }
 }

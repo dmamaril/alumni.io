@@ -225,4 +225,10 @@ var app = angular.module('alumnio', ['ngRoute'])
        return input.substring(0,1).toUpperCase()+input.substring(1);
      }
    }
-  });
+  })
+
+  .filter('timeago', function(){
+  return function(date){
+    return moment(date).fromNow();
+  };
+});

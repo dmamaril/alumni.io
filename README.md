@@ -23,8 +23,8 @@
 ***** CHANGE LOG ******
 
 5/20/2014
-- Moment & ng-time-relative
-  - installed not yet working
+- Momentjs
+  - added a filter as 'timeago'
 
 - Signup.html
   - auto capitalize first letters
