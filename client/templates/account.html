@@ -1,0 +1,50 @@
+<div class='navIcons'>
+  <a href='' class='glyphicon glyphicon-user' title='Account Settings'></a>
+
+  <a href='#inbox' class='glyphicon glyphicon-envelope' title='Inbox'></a>
+
+  <a ng-controller='logOutController' href='' class='glyphicon glyphicon-log-out' ng-click='logOut()' title='Log Out'></a>
+
+</div>
+
+
+<div ng-hide='showEdit'>
+  <span class='glyphicon glyphicon-briefcase'></span>
+  <h4> {{ user.worksAt }} </h4> <hr>
+
+  <span class='glyphicon glyphicon-globe'></span>
+  <h4> {{ user.site }} </h4> <hr>
+
+  <span class='glyphicon glyphicon-link'></span>
+  <h4> {{ user.linkedIn }} </h4> <hr>
+
+  <span class='glyphicon glyphicon-book'></span>
+  <h4> HR: {{ user.cohort }} </h4> <hr>
+
+  <a href='' ng-click='toggleEdit()'><span class='glyphicon glyphicon-edit'></span></a>
+  <a href='/'><span class='glyphicon glyphicon-floppy-disk'></span></a>
+</div>
+
+
+<div ng-show='showEdit'>
+  <form>
+    <span class='glyphicon glyphicon-briefcase'></span>
+    <input value='{{ user.worksAt }}'></input> 
+    <hr>
+
+    <span class='glyphicon glyphicon-globe'></span>
+    <input value='{{ user.site }}'</input> 
+    <hr>
+
+    <span class='glyphicon glyphicon-link'></span>
+    <input value='{{ user.linkedIn }}'</input>
+    <hr>
+
+    <span class='glyphicon glyphicon-book'></span>
+    <input value='{{ user.cohort }}' ng-model='user.cohort'></input> 
+    <hr>
+
+    <a href='' ng-click='toggleEdit()'><span class='glyphicon glyphicon-edit'></span></a>
+    <a href='' ng-click='saveEdit()'><span class='glyphicon glyphicon-floppy-disk'></span></a>
+  </form>
+</div>

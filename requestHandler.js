@@ -77,4 +77,8 @@ exports.fetchInbox = function (req, res) {
   })
 };
 
+exports.fetchUserData = function (req, res) {
+  
+}
+
 // Remove Query: db.users.remove({ "_id": ObjectId("537bc0bd42eb563a3e0e43aa")})

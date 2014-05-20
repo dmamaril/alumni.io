@@ -16,7 +16,10 @@ var app = angular.module('alumnio', ['ngRoute'])
             }
           },
           users: function (mainFactory) {
-            return mainFactory.get('/api/users').then(function (users) { return users.data; });
+            return mainFactory.get('/api/users')
+              .then(function (users) { 
+                return users.data; 
+              });
           }
         }
       })
@@ -32,11 +35,23 @@ var app = angular.module('alumnio', ['ngRoute'])
         controller: 'inboxController',
         templateUrl: '/templates/inbox.html',
         resolve: {
-          messages: function (mainFactory, $window) {
+          userData: function (mainFactory, $window) {
             return mainFactory.post({ _id: $window.sessionStorage._id }, '/api/inbox')
               .then(function (user) { 
-                return user.data
+                return user.data;
               })
+          }
+        }
+      })
+      .when('/account', {
+        controller: 'accountController',
+        templateUrl: '/templates/account.html',
+        resolve: {
+          userInfo: function (mainFactory, $window) {
+            return mainFactory.post({ _id: $window.sessionStorage._id}, '/api/inbox')
+              .then(function (user) {
+                return user.data;
+              });
           }
         }
       })
@@ -82,8 +97,31 @@ var app = angular.module('alumnio', ['ngRoute'])
     }
   })
 
-  .controller('inboxController', function ($scope, $window, $location, mainFactory, messages) {
-    $scope.messages = messages.messages.reverse();
+  .controller('accountController', function ($scope, mainFactory, userInfo) {
+    $scope.showEdit = false;
+
+    $scope.toggleEdit = function () {
+      $scope.showEdit = !$scope.showEdit;
+    };
+
+    $scope.user = {
+      firstname: userInfo.firstname,
+      lastname: userInfo.lastname,
+      worksAt: userInfo.worksAt,
+      site: userInfo.site,
+      linkedIn: userInfo.linkedIn,
+      cohort: userInfo.cohort
+    };
+
+    $scope.saveEdit = function () {
+      $scope.toggleEdit();
+    }
+
+
+  })
+
+  .controller('inboxController', function ($scope, $window, $location, mainFactory, userData) {
+    $scope.messages = userData.messages.reverse();
     $scope.user = $window.sessionStorage.user; 
     $scope.isEmpty = !$scope.messages.length;
     $scope.toggleForm = false;
