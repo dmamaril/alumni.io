@@ -29,19 +29,32 @@ var app = angular.module('alumnio', ['ngRoute'])
 
   .controller('mainController', function ($scope, users, hrFactory) {
     $scope.users = users;
+    $scope.showForm = false;
 
+    $scope.renderForm = function (id, firstname, lastname) {
+      $scope.fullname = firstname + ' ' + lastname;
+      if (id !== $scope.userId) {
+        $scope.userId = id;
+      } else { $scope.showForm = !$scope.showForm; }
+
+    };
+
+    $scope.clearForm = function () {
+      $scope.msg = '';
+    }
 
     // need to update passing in 'from' based on session tokens
-    $scope.sendMsg = function (msg) {
+    $scope.sendMsg = function () {
       var message = {
         _id: $scope.userId,
-        message: message
+        message: $scope.msg
       };
-
-      hrFactory.post(message, '/users')
-        .success(function () {
-          console.log('Message Sent!');
-        });
+      $scope.msg = 'Message Sent!';
+      console.log(message);
+      // hrFactory.post(message, '/users')
+      //   .success(function () {
+      //     console.log('Message Sent!');
+      //   });
     }
   })
 
@@ -75,7 +88,6 @@ var app = angular.module('alumnio', ['ngRoute'])
         linkedIn: $scope.linkedIn,
         site: $scope.site
       };
-      console.log(userData);
       hrFactory.post(userData, '/signup')
         .success(function () {
           console.log ('Sign Up Success!');

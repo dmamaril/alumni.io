@@ -3,15 +3,13 @@
 - Index.html
   - navbar // header with logout?
 
-- Main.html
-  - on click display others who may be in the same company
-  - render 'sendMessage' template when clicked on the envelope
-
 - Signup.html
-  - company logos
+  - company logos as backgroudn images
+    - banner style
 
-- ngAnimate
-  - http://hendrixer.github.io/
+- Send Message
+  - on send message animate upa and out // change clearForm() line 42
+
 
 - Session Tokens
   - check for valid user token else relogin
@@ -19,24 +17,31 @@
 - logOutController
   - is this needed? should just be a part of index.html
 
+***** EXTRA CREDIT ***** 
+- Main.html
+  - on click display others who may be in the same company
+
+- ngAnimate
+  - http://hendrixer.github.io/
+
 
 ***** NIGHTMARE MODE *****
 - Passport Linked-In
-  
-- Send Message functionality
-  - wahooooaoohhh tough
-  - add an inbox Array [] to schema?
-
 
 
 ***** CHANGE LOG ******
 
 5/19/2014
-  - signup.html
-    - basic template complete
+- node modules
+  - installed jsonwebtoken && express-jwt for auth
 
-  - Send Message
-    - backend working properly. Still need separate text view.
+- signup.html
+  - implemented send message function 
+  - basic template complete
+
+- Send Message
+  - send message now takes in user._id to properly forward msg
+  - backend working properly. Still need separate text view.
 
 05/18/2014
 - Users.js

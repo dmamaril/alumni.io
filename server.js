@@ -4,6 +4,8 @@ var partials = require('express-partials');
 var requestHandler = require('./requestHandler');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
+var expressJwt = require('express-jwt');
+var jwt = require('jsonwebtoken');
 
 
 // ***** SETUP MONGOOSE DATABASE ***** //
