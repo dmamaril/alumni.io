@@ -54,9 +54,12 @@ var app = angular.module('alumnio', ['ngRoute'])
 
     $scope.renderForm = function (id, firstname, lastname) {
       $scope.fullname = firstname + ' ' + lastname;
-      if (id !== $scope.userId) {
+      if (!$scope.showForm) { 
         $scope.userId = id;
-      } else { $scope.showForm = !$scope.showForm; }
+        $scope.showForm = !$scope.showForm; 
+      }
+        else if (id !== $scope.userId) { $scope.userId = id; }
+        else { $scope.showForm = !$scope.showForm; }
     };
 
     $scope.clearForm = function () { $scope.msg = ''; }
@@ -80,27 +83,33 @@ var app = angular.module('alumnio', ['ngRoute'])
     }
   })
 
-
   .controller('inboxController', function ($scope, $window, $location, mainFactory, messages) {
     $scope.messages = messages.messages.reverse();
     $scope.user = $window.sessionStorage.user; 
     $scope.isEmpty = !$scope.messages.length;
     $scope.toggleForm = false;
 
-    $scope.renderForm = function(fullname, toId) {
+    $scope.renderForm = function(fullname, fromId) {
       $scope.fullname = fullname;
-      if ($scope.toId !== toId) { $scope.toId = toId; }
+
+      if (!$scope.toggleForm) { 
+        $scope.toId = fromId;
+        $scope.toggleForm = !$scope.toggleForm; 
+      }
+        else if ($scope.toId !== fromId) { $scope.toId = fromId; }
         else { $scope.toggleForm = !$scope.toggleForm;}
     };
+
+    $scope.clearForm = function () { $scope.msg = ''; };
 
     $scope.replyMsg = function () {
       var message = {
         _id: $scope.toId,
         name: $scope.fullname,
+        message: $scope.msg,
         from: $window.sessionStorage.user,
         fromId: $window.sessionStorage._id
       };
-      console.log(message);
       $scope.msg = 'Reply Sent!'
       mainFactory.post(message, '/api/users')
         .success(function () { console.log('Reply sent!'); })

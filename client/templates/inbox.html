@@ -18,7 +18,7 @@
   <blockquote> {{ message.message }} 
     <small>{{ message.from }}
       <!-- <time class='relative' datetime='{{ message.sent }}'>Sent a while ago</time> -->
-      <a href='' ng-click='renderForm(message.from, message.toId, message.fromId)' class='glyphicon glyphicon-send' title='Reply'></a>
+      <a href='' ng-click='renderForm(message.from, message.fromId)' class='glyphicon glyphicon-send' title='Reply'></a>
     </small>
   </blockquote>
   <hr>
@@ -26,7 +26,7 @@
 
 <div class="container" ng-show='toggleForm'>
 
-  <form role="form" style="width:400px; margin: 0 auto;" ng-submit='sendMsg()'>
+  <form role="form" style="width:400px; margin: 0 auto;" ng-submit='replyMsg()'>
       <legend>Send Message</legend>
       <small> To: {{ fullname }}</small>
       <div class="required-field-block">
