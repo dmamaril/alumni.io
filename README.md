@@ -3,7 +3,6 @@
 - Signup.html
   - company logos as backgroudn images
     - dynamic
-  - create session on signup
 
 - Account Update functionality
 

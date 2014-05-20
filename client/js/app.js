@@ -135,10 +135,9 @@ var app = angular.module('alumnio', ['ngRoute'])
     }
   })
 
-  .controller('signUpController', function ($scope, mainFactory, $location) {
+  .controller('signUpController', function ($scope, mainFactory, $location, $window) {
     $scope.step2 = false;
     $scope.step1Submit = function () { $scope.step2 = true; };
-
 
     $scope.signUpUser = function () {
       $scope.firstname = $scope.firstname.toLowerCase();
@@ -158,7 +157,13 @@ var app = angular.module('alumnio', ['ngRoute'])
       mainFactory.post(userData, '/signup')
         .success(function () {
           console.log ('Sign Up Success!');
-          $location.path('/');
+          mainFactory.post({ email: $scope.email, password: $scope.password }, '/login')
+            .success(function (data) {
+              $window.sessionStorage.token = data.token;
+              $window.sessionStorage._id = data._id;
+              $window.sessionStorage.user = data.user;
+              $location.path('/');
+            });
         })
         .error(function () {
           console.log ('Err @ app.js signUpController :: Sign up failed.');
