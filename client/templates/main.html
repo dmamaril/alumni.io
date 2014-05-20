@@ -9,23 +9,6 @@
 
 </div>
 
-
-<div class="container" ng-show='showForm'>
-
-  <form role="form" style="width:400px; margin: 0 auto;" ng-submit='sendMsg()'>
-      <legend>Send Message</legend>
-      <small> To: {{ fullname }}</small>
-      <div class="required-field-block">
-          <textarea ng-model='msg' ng-click='clearForm()' rows="5" class="form-control" placeholder="Message"></textarea>
-          <div class="required-icon">
-          </div>
-      </div>
-      
-      <button class="btn btn-default btn-sm" type='submit'>Send</button>
-  </form>
-</div>
-
-
 <div class='mainView'>
   <div ng-repeat='user in users'>
     
@@ -45,3 +28,19 @@
     </div>
   </div>
 </div>
+
+<div class="container" ng-show='showForm'>
+
+  <form role="form" style="width:400px; margin: 0 auto;" ng-submit='sendMsg()'>
+      <legend>Send Message</legend>
+      <small> To: {{ fullname }}</small>
+      <div class="required-field-block">
+          <textarea ng-model='msg' ng-click='clearForm()' rows="5" class="form-control" placeholder="Message"></textarea>
+          <div class="required-icon">
+          </div>
+      </div>
+      
+      <button class="btn btn-default btn-sm" type='submit'>Send</button>
+  </form>
+</div>
+

@@ -91,7 +91,6 @@ var app = angular.module('alumnio', ['ngRoute'])
 
     $scope.renderForm = function(fullname, fromId) {
       $scope.fullname = fullname;
-
       if (!$scope.toggleForm) { 
         $scope.toId = fromId;
         $scope.toggleForm = !$scope.toggleForm; 
@@ -144,6 +143,8 @@ var app = angular.module('alumnio', ['ngRoute'])
       $scope.lastname = $scope.lastname.toLowerCase();
       $scope.firstname = $scope.firstname[0].toUpperCase() + $scope.firstname.substr(1);
       $scope.lastname = $scope.lastname[0].toUpperCase() + $scope.lastname.substr(1);
+      $scope.worksAt = $scope.worksAt.split(' ').join('');
+
       var userData = { 
         email: $scope.email, 
         password: $scope.password, 

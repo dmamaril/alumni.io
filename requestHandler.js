@@ -76,4 +76,6 @@ exports.fetchInbox = function (req, res) {
     console.log('Found user! ', user);
     res.send(user);
   })
-}
+};
+
+// Remove Query: db.users.remove({ "_id": ObjectId("537bc0bd42eb563a3e0e43aa")})

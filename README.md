@@ -1,9 +1,5 @@
 ***** TO DO ****** 
 
-- Signup.html
-  - company logos as backgroudn images
-    - dynamic
-
 - Account Update functionality
 
 
@@ -22,6 +18,9 @@
 ***** CHANGE LOG ******
 
 5/20/2014
+- Main.html
+  - background image changes dynamically
+
 - Momentjs
   - added a filter as 'timeago'
 
