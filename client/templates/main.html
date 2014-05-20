@@ -1,9 +1,12 @@
 <link rel='stylesheet' href='../css/main.css'/>
 
 <div class='navIcons'>
-  <a href='' class='glyphicon glyphicon-user'></a>
-  <a href='' class='glyphicon glyphicon-envelope'></a>
-  <a ng-controller='logOutController' href='' class='glyphicon glyphicon-log-out' ng-click='logOut()'></a>
+  <a href='' class='glyphicon glyphicon-user' title='Account Settings'></a>
+
+  <a href='#inbox' class='glyphicon glyphicon-envelope' title='Inbox'></a>
+
+  <a ng-controller='logOutController' href='' class='glyphicon glyphicon-log-out' ng-click='logOut()' title='Log Out'></a>
+
 </div>
 
 
@@ -18,7 +21,7 @@
           </div>
       </div>
       
-      <button class="btn btn-default" type='submit'>Send</button>
+      <button class="btn btn-default btn-sm" type='submit'>Send</button>
   </form>
 </div>
 
@@ -33,7 +36,7 @@
     <div class='alumniView'>
       <p> 
       {{ user.lastname | capitalize }}, {{ user.firstname | capitalize }} 
-      <a href='' class='glyphicon glyphicon-send' ng-click='renderForm(user._id, user.firstname, user.lastname)'></a>
+      <a href='' class='glyphicon glyphicon-send' ng-click='renderForm(user._id, user.firstname, user.lastname)' title='Send Message'></a>
       </p>
       <div><a ng-hide='{{user.site}}' href='http://{{user.site}}'>{{ user.site }}</a></div>
       <div><a href='http://www.{{user.linkedIn}}'>{{user.linkedIn}}</a></div>

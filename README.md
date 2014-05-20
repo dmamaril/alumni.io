@@ -1,14 +1,12 @@
 ***** TO DO ****** 
 
-- Index.html
-  - navbar // header with logout?
-
 - Signup.html
   - company logos as backgroudn images
     - banner style
+  - login automatically after sign up
 
-- logOutController
-  - is this needed? should just be a part of index.html
+- Inbox.html
+  - render out the inbox
 
 ***** EXTRA CREDIT ***** 
 - Main.html
@@ -25,6 +23,15 @@
 ***** CHANGE LOG ******
 
 5/19/2014
+- Navbar
+  - logout connected
+  - added Edit User icon [[ no functionality yet ]]
+  - added Inbox User icon [[ no functionality yet ]]
+
+- Main.html
+  - switched sendMsg icon
+
+
 - user authentication for protected assets
   - completed with express-jwt & jsonwebtokens
    - http://auth0.com/blog/2014/01/07/angularjs-authentication-with-cookies-vs-token
