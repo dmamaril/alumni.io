@@ -31,7 +31,7 @@ var app = express()
   .get('/api/users', requestHandler.fetchUsers)
   .post('/api/users', requestHandler.addMessage)
   .post('/api/inbox', requestHandler.fetchInbox)
-  .post('/api/account', requestHandler.fetchUserData);
+  .post('/api/account', requestHandler.saveNewUserData);
 // ***** END CONFIGURE EXPRESS SERVER ***** //
 
 

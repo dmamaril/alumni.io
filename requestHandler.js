@@ -77,8 +77,16 @@ exports.fetchInbox = function (req, res) {
   })
 };
 
-exports.fetchUserData = function (req, res) {
-  
-}
+exports.saveNewUserData = function (req, res) {
+  UserModel.update({ _id: req.body._id}, {
+    $set: {
+      worksAt: req.body.worksAt,
+      site: req.body.site,
+      linkedIn: req.body.linkedIn,
+      cohort: req.body.cohort   
+    }
+  }, function (a,b,c) { console.log(a,b,c, 'hi')});
+  res.send(req.body);
+};
 
 // Remove Query: db.users.remove({ "_id": ObjectId("537bc0bd42eb563a3e0e43aa")})

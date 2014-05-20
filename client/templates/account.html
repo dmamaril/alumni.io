@@ -29,15 +29,15 @@
 <div ng-show='showEdit'>
   <form>
     <span class='glyphicon glyphicon-briefcase'></span>
-    <input value='{{ user.worksAt }}'></input> 
+    <input value='{{ user.worksAt }}' ng-model='user.worksAt'></input> 
     <hr>
 
     <span class='glyphicon glyphicon-globe'></span>
-    <input value='{{ user.site }}'</input> 
+    <input value='{{ user.site }}' ng-model='user.site'</input> 
     <hr>
 
     <span class='glyphicon glyphicon-link'></span>
-    <input value='{{ user.linkedIn }}'</input>
+    <input value='{{ user.linkedIn }}' ng-model='user.linkedIn'</input>
     <hr>
 
     <span class='glyphicon glyphicon-book'></span>

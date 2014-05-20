@@ -105,8 +105,7 @@ var app = angular.module('alumnio', ['ngRoute'])
     };
 
     $scope.user = {
-      firstname: userInfo.firstname,
-      lastname: userInfo.lastname,
+      _id: userInfo._id,
       worksAt: userInfo.worksAt,
       site: userInfo.site,
       linkedIn: userInfo.linkedIn,
@@ -115,6 +114,9 @@ var app = angular.module('alumnio', ['ngRoute'])
 
     $scope.saveEdit = function () {
       $scope.toggleEdit();
+      mainFactory.post($scope.user, '/api/account')
+        .success(function () { console.log('User edits saved.'); })
+        .error(function () { console.log('error saving data'); })
     }
 
 
