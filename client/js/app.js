@@ -7,8 +7,14 @@ var app = angular.module('alumnio', ['ngRoute'])
         controller: 'mainController',
         templateUrl: '/templates/main.html',
         resolve: {
+          isAuth: function (authInterceptor, $window) {
+            if (!$window.sessionStorage.token) {
+              return authInterceptor.login();
+            }
+          },
           users: function (hrFactory) {
-            return hrFactory.get('/users').then(function (users) { return users.data; });
+            console.log('Checking for active session token...');
+            return hrFactory.get('/api/users').then(function (users) { return users.data; });
           }
         }
       })
@@ -27,7 +33,7 @@ var app = angular.module('alumnio', ['ngRoute'])
       .otherwise({ redirectTo: '/login' })
   }])
 
-  .controller('mainController', function ($scope, users, hrFactory) {
+  .controller('mainController', function ($scope, users, hrFactory, $window) {
     $scope.users = users;
     $scope.showForm = false;
 
@@ -47,29 +53,34 @@ var app = angular.module('alumnio', ['ngRoute'])
     $scope.sendMsg = function () {
       var message = {
         _id: $scope.userId,
-        message: $scope.msg
+        message: $scope.msg,
+        from: $window.sessionStorage.user
       };
       $scope.msg = 'Message Sent!';
       console.log(message);
-      // hrFactory.post(message, '/users')
-      //   .success(function () {
-      //     console.log('Message Sent!');
-      //   });
+      hrFactory.post(message, '/api/users')
+        .success(function () {
+          console.log('Message Sent!');
+        })
+        .error(function () {
+          console.log('wtufuuuu')
+        })
     }
   })
 
-  .controller('loginController', function ($scope, hrFactory, $location) {
-    $scope.logInUser = function () {
-      hrFactory.post({ email: $scope.email, password: $scope.password }, '/login')
-        .success(function () {
-          console.log('User authorized. Redirecting to main page!');
-          $location.path('/');
-        })
-        .error(function () {
-          console.log ('Err @ app.js 40 :: User was not authorized.');
-        });
-    };
-  })
+  // original loginController
+  // .controller('loginController', function ($scope, hrFactory, $location) {
+  //   $scope.logInUser = function () {
+  //     hrFactory.post({ email: $scope.email, password: $scope.password }, '/login')
+  //       .success(function () {
+  //         console.log('User authorized. Redirecting to main page!');
+  //         $location.path('/');
+  //       })
+  //       .error(function () {
+  //         console.log ('Err @ app.js 40 :: User was not authorized.');
+  //       });
+  //   };
+  // })
 
   .controller('signUpController', function ($scope, hrFactory, $location) {
     // Toggle between forms //
@@ -115,7 +126,7 @@ var app = angular.module('alumnio', ['ngRoute'])
       post: function (data, path) {
         return $http.post(path, data)
           .success(function (users) {
-            console.log('Post Success!', users);
+            console.log('Post Success!');
           })
           .error(function () {
             throw 'Err @ app.js 56';
@@ -130,16 +141,51 @@ var app = angular.module('alumnio', ['ngRoute'])
    input = input.toLowerCase();
    return input.substring(0,1).toUpperCase()+input.substring(1);
    }
-  });
+  })
 
-  // https://coderwall.com/p/f6brkg
-  // .service('SessionService', function(){
-  //   var userIsAuthenticated = false;
+  .config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.interceptors.push('authInterceptor');
+  }])
 
-  //   this.setUserAuthenticated = function(value){
-  //       userIsAuthenticated = value;
-  //   };
 
-  //   this.getUserAuthenticated = function(){
-  //       return userIsAuthenticated;
-  //   };
+  .factory('authInterceptor', function ($rootScope, $q, $window, $location) {
+    return {
+      request: function (config) {
+        config.headers = config.headers || {};
+        if ($window.sessionStorage.token) {
+          config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+        }
+        return config;
+      },
+      response: function (response) {
+        if (response.status === 401) { // handle user is unauthenticated
+          console.log('Am I here?')
+          $location.path('/login');
+        }
+        return response || $q.when(response); 
+      },
+      login: function () {
+        $location.path('/login');
+      }
+    }
+  })
+
+  .controller('loginController', function ($scope, hrFactory, $location, $window, $rootScope) {
+    $scope.logInUser = function () {
+      hrFactory.post({ email: $scope.email, password: $scope.password }, '/login')
+        .success(function (data) {
+          $window.sessionStorage.token = data.token;
+          console.log(data);
+          $window.sessionStorage.user = data.user;
+          console.log($window.sessionStorage.user, 'Session Storage User');
+          // $rootScope.isAuthenticated = false;
+          app.isAuthenticated = false;
+          $location.path('/');
+        })
+        .error(function () {
+          delete $window.sessionStorage.token
+          $location.path('/login');
+          console.log ('Err @ app.js 40 :: User was not authorized.');
+        });
+    }
+  })

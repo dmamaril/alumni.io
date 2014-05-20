@@ -16,11 +16,14 @@ var db = mongoose.connection
 
 
 // ***** CONFIGURE EXPRESS SERVER ***** //
+var secret = 'Shaco is King of the jungle.'
+
 var app = express()
 // app.configure(function () {
     .use(partials())
     .use(bodyParser())
     .use(morgan('dev')) // logs requests to server
+    .use('/api', expressJwt({secret: secret}))
     // .set('view engine', 'ejs')
     .use(express.static(__dirname + '/client'))
   // });
@@ -32,8 +35,8 @@ var app = express()
   // .get('/signup', requestHandler.renderSignUp)
   .post('/signup', requestHandler.signUpUser)
   
-  .get('/users', requestHandler.fetchUsers)
-  .post('/users', requestHandler.addMessage);
+  .get('/api/users', requestHandler.fetchUsers)
+  .post('/api/users', requestHandler.addMessage);
 // ***** END CONFIGURE EXPRESS SERVER ***** //
 
 

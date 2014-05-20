@@ -4,7 +4,9 @@
 var db = require('./server');
 var express = require('express');
 var UserModel = require('./mongoose/Users');
+var jwt = require('jsonwebtoken');
 
+var secret = 'Shaco is King of the jungle.'
 
 exports.renderIndex = function (req, res) {
   console.log ('Redirecting')
@@ -15,9 +17,18 @@ exports.logInUser = function (req, res) {
   UserModel.findOne({email: req.body.email}, function (err, user) {
     if (user) {
       user.comparePassword(req.body.password, function (isMatch) {
-        if (isMatch) { res.send(user) }
-          else { console.log ('Incorrect Password'); }
-      })
+        if (isMatch) { 
+          var tokenProfile = {
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
+            id: user._id
+          };
+          var token = jwt.sign(tokenProfile, secret, {expiresInMinutes: 60 * 5});
+          res.json({token:token, user: user.firstname + ' ' + user.lastname});
+        }
+          else { res.send(401, 'Wrong user or password'); }
+      });
     } else if (err) { console.log ('Error @ Line 25 requestHandler.js')}
   });
 };
