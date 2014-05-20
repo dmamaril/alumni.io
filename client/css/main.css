@@ -1,0 +1,23 @@
+.mainView {
+  width: 350px;
+  background-color: white;
+  margin: 0 auto;
+  padding-top: 30px;
+  max-height: 500px;
+  overflow: scroll;
+}
+
+.alumniView {
+  text-align: left;
+  padding-right: 10px;
+  background-image: url('../imgs/logo.png');
+  max-width: 100%;
+  background-position: right;
+  background-size: 15% auto;
+  background-repeat: no-repeat;
+}
+
+.alumniWorksAt {
+  float: right;
+  margin-top: -40px;
+}
