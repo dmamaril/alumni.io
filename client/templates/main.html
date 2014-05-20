@@ -29,11 +29,11 @@
 <div class='mainView'>
   <div ng-repeat='user in users'>
     
-  <div class='alumniWorksAt' style='padding-top: 30px'>
-    <!-- <p> {{ user.worksAt }} </p> -->
-   </div>
+  <div class='alumniWorksAt'></div>
 
-    <div class='alumniView'>
+    <div class='alumniView'
+      ng-style="{'background-image':'url(../imgs/{{user.worksAt | lowercase }}.png)'}">
+
       <p> 
       {{ user.lastname | capitalize }}, {{ user.firstname | capitalize }} 
       <a href='' class='glyphicon glyphicon-send' ng-click='renderForm(user._id, user.firstname, user.lastname)' title='Send Message'></a>

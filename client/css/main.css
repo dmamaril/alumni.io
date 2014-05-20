@@ -10,7 +10,8 @@
 .alumniView {
   text-align: left;
   padding-right: 10px;
-  background-image: url('../imgs/logo.png');
+  /*background-image: url('../imgs/logo.png');*/
+  /*padding-top: 30px;*/
   max-width: 100%;
   background-position: right;
   background-size: 15% auto;
