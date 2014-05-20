@@ -1,28 +1,26 @@
 <link rel='stylesheet' href='../css/main.css'/>
 
-  <div class="container" ng-show='showForm'>
-
-    <form role="form" style="width:400px; margin: 0 auto;" ng-submit='sendMsg()'>
-        <legend>Send Message</legend>
-        <small> To: {{ fullname }}</small>
-        <div class="required-field-block">
-            <textarea ng-model='msg' ng-click='clearForm()' rows="5" class="form-control" placeholder="Message"></textarea>
-            <div class="required-icon">
-            </div>
-        </div>
-        
-        <button class="btn btn-default" type='submit'>Send</button>
-    </form>
-  </div>
-
-<!-- 
-<ul class="nav nav-pills nav-stacked">
-  <li> HR 13 </li>
-  <li> HR 12 </li>
-  <li> HR 11 </li>
-</ul> -->
+<div class='navIcons'>
+  <a href='' class='glyphicon glyphicon-user'></a>
+  <a href='' class='glyphicon glyphicon-envelope'></a>
+  <a ng-controller='logOutController' href='' class='glyphicon glyphicon-log-out' ng-click='logOut()'></a>
+</div>
 
 
+<div class="container" ng-show='showForm'>
+
+  <form role="form" style="width:400px; margin: 0 auto;" ng-submit='sendMsg()'>
+      <legend>Send Message</legend>
+      <small> To: {{ fullname }}</small>
+      <div class="required-field-block">
+          <textarea ng-model='msg' ng-click='clearForm()' rows="5" class="form-control" placeholder="Message"></textarea>
+          <div class="required-icon">
+          </div>
+      </div>
+      
+      <button class="btn btn-default" type='submit'>Send</button>
+  </form>
+</div>
 
 
 <div class='mainView'>
@@ -35,7 +33,7 @@
     <div class='alumniView'>
       <p> 
       {{ user.lastname | capitalize }}, {{ user.firstname | capitalize }} 
-      <a class='glyphicon glyphicon-envelope' ng-click='renderForm(user._id, user.firstname, user.lastname)'></a>
+      <a href='' class='glyphicon glyphicon-send' ng-click='renderForm(user._id, user.firstname, user.lastname)'></a>
       </p>
       <div><a ng-hide='{{user.site}}' href='http://{{user.site}}'>{{ user.site }}</a></div>
       <div><a href='http://www.{{user.linkedIn}}'>{{user.linkedIn}}</a></div>

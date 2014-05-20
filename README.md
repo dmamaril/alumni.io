@@ -7,13 +7,6 @@
   - company logos as backgroudn images
     - banner style
 
-- Send Message
-  - on send message animate upa and out // change clearForm() line 42
-
-
-- Session Tokens
-  - check for valid user token else relogin
-
 - logOutController
   - is this needed? should just be a part of index.html
 
@@ -32,6 +25,11 @@
 ***** CHANGE LOG ******
 
 5/19/2014
+- user authentication for protected assets
+  - completed with express-jwt & jsonwebtokens
+   - http://auth0.com/blog/2014/01/07/angularjs-authentication-with-cookies-vs-token
+
+
 - node modules
   - installed jsonwebtoken && express-jwt for auth
 
