@@ -25,3 +25,8 @@
 .navIcons {
   background-color: lightgrey;
 }
+
+.inboxView {
+  width: 350px;
+  margin: 0 auto;
+}

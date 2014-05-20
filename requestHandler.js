@@ -25,7 +25,7 @@ exports.logInUser = function (req, res) {
             id: user._id
           };
           var token = jwt.sign(tokenProfile, secret, {expiresInMinutes: 60 * 5});
-          res.json({token:token, user: user.firstname + ' ' + user.lastname});
+          res.json({token:token, _id: user._id, user: user.firstname + ' ' + user.lastname});
         }
           else { res.send(401, 'Wrong user or password'); }
       });
@@ -68,4 +68,11 @@ exports.addMessage = function (req, res) {
   console.log(message, 'Sent to ' + req.body.name);
   UserModel.update({ _id: req.body._id }, { $push: {messages: message} }, function () {});
   res.send(req.body.message);
+};
+
+exports.fetchInbox = function (req, res) {
+  UserModel.findOne({ _id: req.body._id }, function (err, user) {
+    console.log('Found user! ', user);
+    res.send(user);
+  })
 }

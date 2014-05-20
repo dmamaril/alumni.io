@@ -16,9 +16,9 @@ var app = angular.module('alumnio', ['ngRoute'])
               return authInterceptor.login();
             }
           },
-          users: function (hrFactory) {
+          users: function (mainFactory) {
             console.log('Checking for active session token...');
-            return hrFactory.get('/api/users').then(function (users) { return users.data; });
+            return mainFactory.get('/api/users').then(function (users) { return users.data; });
           }
         }
       })
@@ -32,7 +32,15 @@ var app = angular.module('alumnio', ['ngRoute'])
       })
       .when('/inbox', {
         controller: 'inboxController',
-        templateUrl: '/templates/inbox.html'
+        templateUrl: '/templates/inbox.html',
+        resolve: {
+          messages: function (mainFactory, $window) {
+            return mainFactory.post({ _id: $window.sessionStorage._id }, '/api/inbox')
+              .then(function (user) { 
+                return user.data
+              })
+          }
+        }
       })
       .when('/logout', {
         controller: 'logOutController',
@@ -41,7 +49,7 @@ var app = angular.module('alumnio', ['ngRoute'])
       .otherwise({ redirectTo: '/login' });
   }])
 
-  .controller('mainController', function ($scope, users, hrFactory, $window, $timeout) {
+  .controller('mainController', function ($scope, users, mainFactory, $window, $timeout) {
     $scope.users = users;
     $scope.showForm = false;
 
@@ -62,7 +70,7 @@ var app = angular.module('alumnio', ['ngRoute'])
         from: $window.sessionStorage.user
       };
       $scope.msg = 'Message Sent!';
-      hrFactory.post(message, '/api/users')
+      mainFactory.post(message, '/api/users')
         .success(function () {
           console.log('Message sent!')
         })
@@ -72,14 +80,14 @@ var app = angular.module('alumnio', ['ngRoute'])
     }
   })
 
-  .controller('loginController', function ($scope, hrFactory, $location, $window, $rootScope) {
+
+  .controller('loginController', function ($scope, mainFactory, $location, $window, $rootScope) {
     $scope.logInUser = function () {
-      hrFactory.post({ email: $scope.email, password: $scope.password }, '/login')
+      mainFactory.post({ email: $scope.email, password: $scope.password }, '/login')
         .success(function (data) {
           $window.sessionStorage.token = data.token;
-          console.log(data);
+          $window.sessionStorage._id = data._id;
           $window.sessionStorage.user = data.user;
-          app.isAuthenticated = false;
           $location.path('/');
         })
         .error(function () {
@@ -90,7 +98,7 @@ var app = angular.module('alumnio', ['ngRoute'])
     }
   })
 
-  .controller('signUpController', function ($scope, hrFactory, $location) {
+  .controller('signUpController', function ($scope, mainFactory, $location) {
     // Toggle between forms //
     $scope.step2 = false;
     $scope.step1Submit = function () { $scope.step2 = true; };
@@ -107,7 +115,7 @@ var app = angular.module('alumnio', ['ngRoute'])
         linkedIn: $scope.linkedIn,
         site: $scope.site
       };
-      hrFactory.post(userData, '/signup')
+      mainFactory.post(userData, '/signup')
         .success(function () {
           console.log ('Sign Up Success!');
           $location.path('/');
@@ -118,10 +126,17 @@ var app = angular.module('alumnio', ['ngRoute'])
     };
   })
 
-  .controller('inboxController', function ($scope, $window) {
+  .controller('inboxController', function ($scope, $window, $location, mainFactory, messages) {
+    $scope.messages = messages.messages.reverse();
     $scope.user = $window.sessionStorage.user;
+    console.log(messages);
+    // mainFactory.post({ _id: $window.sessionStorage._id }, '/api/inbox')
+    //   .success(function (data, status, headers, config) {
+    //     console.log('Messages received! See below.');
+    //     console.log(data.messages);
+    //     $scope.messages = data.messages;
+    //   })
   })
-
 
   .controller('logOutController', function ($scope, $location, $window) {
     $scope.logOut = function () {
@@ -131,7 +146,7 @@ var app = angular.module('alumnio', ['ngRoute'])
     };
   })
 
-  .factory('hrFactory', function ($http) {
+  .factory('mainFactory', function ($http) {
     return {
       get: function (path) {
         return $http.get(path)

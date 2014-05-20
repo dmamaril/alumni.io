@@ -8,3 +8,10 @@
 </div>
 
 <h3> Welcome, {{ user }} </h3>
+
+<div ng-repeat='message in messages' class='inboxView'>
+ <blockquote> {{ message.message }} <small>{{ message.from }}</small> </blockquote>
+  <hr>
+</div>
+  
+</div>

@@ -36,7 +36,9 @@ var app = express()
   .post('/signup', requestHandler.signUpUser)
   
   .get('/api/users', requestHandler.fetchUsers)
-  .post('/api/users', requestHandler.addMessage);
+  .post('/api/users', requestHandler.addMessage)
+
+  .post('/api/inbox', requestHandler.fetchInbox)
 // ***** END CONFIGURE EXPRESS SERVER ***** //
 
 
