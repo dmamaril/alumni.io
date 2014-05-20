@@ -128,14 +128,9 @@ var app = angular.module('alumnio', ['ngRoute'])
 
   .controller('inboxController', function ($scope, $window, $location, mainFactory, messages) {
     $scope.messages = messages.messages.reverse();
-    $scope.user = $window.sessionStorage.user;
-    console.log(messages);
-    // mainFactory.post({ _id: $window.sessionStorage._id }, '/api/inbox')
-    //   .success(function (data, status, headers, config) {
-    //     console.log('Messages received! See below.');
-    //     console.log(data.messages);
-    //     $scope.messages = data.messages;
-    //   })
+    $scope.user = $window.sessionStorage.user; 
+    $scope.isEmpty = !$scope.messages.length;
+    console.log($scope.isEmpty);
   })
 
   .controller('logOutController', function ($scope, $location, $window) {

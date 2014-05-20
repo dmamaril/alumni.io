@@ -3,10 +3,19 @@
 - Signup.html
   - company logos as backgroudn images
     - banner style
-  - login automatically after sign up
+  - create session on signup
 
 - Inbox.html
-  - render out the inbox
+  - complete reply functionality
+
+- Sign up
+  - upper case first letter of first & last names
+
+- styles.css
+  - edit positioning for footer
+
+- Account Update functionality
+
 
 ***** EXTRA CREDIT ***** 
 - Main.html
@@ -23,10 +32,14 @@
 ***** CHANGE LOG ******
 
 5/19/2014
+- Inbox
+  - Ability to reply [[ not yet functional ]]
+  - Fetch messages from server sorted by most recent
+
 - Navbar
   - logout connected
   - added Edit User icon [[ no functionality yet ]]
-  - added Inbox User icon [[ no functionality yet ]]
+  - added Inbox User icon
 
 - Main.html
   - switched sendMsg icon

@@ -7,10 +7,19 @@
 
 </div>
 
-<h3> Welcome, {{ user }} </h3>
+<h4> <span class='glyphicon glyphicon-envelope'></span></h4>
+
+<div ng-if='isEmpty'>
+  <blockquote>There doesn't seem go be anything here.</blockquote>
+</div>
+
 
 <div ng-repeat='message in messages' class='inboxView'>
- <blockquote> {{ message.message }} <small>{{ message.from }}</small> </blockquote>
+  <blockquote> {{ message.message }} 
+    <small>{{ message.from }}
+      <a href='' class='glyphicon glyphicon-send' title='Reply'></a>
+    </small>
+  </blockquote>
   <hr>
 </div>
   

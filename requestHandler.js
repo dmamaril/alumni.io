@@ -64,7 +64,7 @@ exports.fetchUsers = function (req, res) {
 };
 
 exports.addMessage = function (req, res) {
-  var message = {from: req.body.from, message: req.body.message};
+  var message = {from: req.body.from, message: req.body.message, fromId: req.body._id};
   console.log(message, 'Sent to ' + req.body.name);
   UserModel.update({ _id: req.body._id }, { $push: {messages: message} }, function () {});
   res.send(req.body.message);
