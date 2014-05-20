@@ -1,6 +1,3 @@
-// var crypto = require('crypto');
-// var bycrpt = require('bcrypt');
-// var util = require('./util.js');
 var db = require('./server');
 var express = require('express');
 var UserModel = require('./mongoose/Users');
@@ -10,7 +7,7 @@ var moment = require('moment');
 var secret = 'Shaco is King of the jungle.'
 
 exports.renderIndex = function (req, res) {
-  console.log ('Redirecting')
+  console.log ('Redirecting to index.html');
   res.sendfile('./client/templates/index.html');
 };
 
@@ -25,7 +22,8 @@ exports.logInUser = function (req, res) {
             email: user.email,
             id: user._id
           };
-          var token = jwt.sign(tokenProfile, secret, {expiresInMinutes: 60 * 5});
+          console.log(user.firstname + ' has successfully logged in.');
+          var token = jwt.sign(tokenProfile, secret, {expiresInMinutes: 20});
           res.json({token:token, _id: user._id, user: user.firstname + ' ' + user.lastname});
         }
           else { res.send(401, 'Wrong user or password'); }
@@ -58,8 +56,9 @@ exports.signUpUser = function (req, res) {
 };
 
 exports.fetchUsers = function (req, res) {
-  console.log('fetch users')
+  console.log('Fetching Users...');
   UserModel.find({}, function (err, users) {
+    console.log('Fetch complete.');
     res.send(users);
   });
 };

@@ -1,7 +1,5 @@
 ***** TO DO ****** 
-
 - Account Update functionality
-
 
 ***** EXTRA CREDIT ***** 
 - Main.html
@@ -10,14 +8,14 @@
 - ngAnimate
   - http://hendrixer.github.io/
 
-
 ***** NIGHTMARE MODE *****
 - Passport Linked-In
-
 
 ***** CHANGE LOG ******
 
 5/20/2014
+- General code cleanup
+
 - Grunt
   - configure grunt
   - add .jshintrc
@@ -46,7 +44,6 @@
 
 - Main.html
   - switched sendMsg icon
-
 
 - user authentication for protected assets
   - completed with express-jwt & jsonwebtokens

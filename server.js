@@ -19,26 +19,18 @@ var db = mongoose.connection
 var secret = 'Shaco is King of the jungle.'
 
 var app = express()
-// app.configure(function () {
-    .use(partials())
-    .use(bodyParser())
-    .use(morgan('dev')) // logs requests to server
-    .use('/api', expressJwt({secret: secret}))
-    // .set('view engine', 'ejs')
-    .use(express.static(__dirname + '/client'))
-  // });
+  .use(partials())
+  .use(bodyParser())
+  .use(morgan('dev'))
+  .use('/api', expressJwt({secret: secret}))
+  .use(express.static(__dirname + '/client'))
 
   .get('/', requestHandler.renderIndex)
-  // .get('/login', requestHandler.renderLogin)
   .post('/login', requestHandler.logInUser)
-  
-  // .get('/signup', requestHandler.renderSignUp)
-  .post('/signup', requestHandler.signUpUser)
-  
+  .post('/signup', requestHandler.signUpUser)  
   .get('/api/users', requestHandler.fetchUsers)
   .post('/api/users', requestHandler.addMessage)
-
-  .post('/api/inbox', requestHandler.fetchInbox)
+  .post('/api/inbox', requestHandler.fetchInbox);
 // ***** END CONFIGURE EXPRESS SERVER ***** //
 
 
@@ -47,5 +39,4 @@ var app = express()
 var port = process.env.PORT || 8080;
 app.listen(port);
 console.log('Node server initialized on port ' + port + '.');
-
 module.exports = db;
