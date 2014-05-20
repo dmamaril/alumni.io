@@ -18,7 +18,7 @@
   <blockquote> {{ message.message }} 
     <small>{{ message.from }}
       <!-- <time class='relative' datetime='{{ message.sent }}'>Sent a while ago</time> -->
-      <a href='' ng-click='renderForm(message.from, message._id)' class='glyphicon glyphicon-send' title='Reply'></a>
+      <a href='' ng-click='renderForm(message.from, message.toId, message.fromId)' class='glyphicon glyphicon-send' title='Reply'></a>
     </small>
   </blockquote>
   <hr>

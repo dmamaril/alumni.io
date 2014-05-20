@@ -16,16 +16,11 @@
                 <p class="form-title" ng-if='firstname'>
                    <small> Welcome,</small>{{ firstname }} </p>
                 <form class="login" ng-submit='step1Submit()'>
-                <input type="text" ng-model='email' placeholder="email" />
-                <input type="password" ng-model='password' placeholder="Password" />
-                <input type="text" ng-model='firstname' placeholder="forename" />
-                <input type="text" ng-model='lastname' placeholder="surname" />
-                <input type="submit" value="Sign Up" class="btn btn-default btn-sm" />
-
-                        <!-- add forgot password feature
-                        <div class="col-md-6 forgot-pass-content">
-                            <a href="javascription:void(0)" class="forgot-pass">Forgot Password</a>
-                        </div> -->
+                    <input type="text" ng-model='email' placeholder="email" />
+                    <input type="password" ng-model='password' placeholder="Password" />
+                    <input type="text" ng-model='firstname' placeholder="forename" />
+                    <input type="text" ng-model='lastname' placeholder="surname" />
+                    <input type="submit" value="Next Step" class="btn btn-default btn-sm" />
                 </form>
             </div>
 

@@ -85,13 +85,27 @@ var app = angular.module('alumnio', ['ngRoute'])
     $scope.messages = messages.messages.reverse();
     $scope.user = $window.sessionStorage.user; 
     $scope.isEmpty = !$scope.messages.length;
-    $scope.toggleForm = true;
+    $scope.toggleForm = false;
 
-    $scope.renderForm = function(fullname, id) {
-      console.log($scope.messages);
-      console.log($window.sessionStorage._id)
-    }
+    $scope.renderForm = function(fullname, toId) {
+      $scope.fullname = fullname;
+      if ($scope.toId !== toId) { $scope.toId = toId; }
+        else { $scope.toggleForm = !$scope.toggleForm;}
+    };
 
+    $scope.replyMsg = function () {
+      var message = {
+        _id: $scope.toId,
+        name: $scope.fullname,
+        from: $window.sessionStorage.user,
+        fromId: $window.sessionStorage._id
+      };
+      console.log(message);
+      $scope.msg = 'Reply Sent!'
+      mainFactory.post(message, '/api/users')
+        .success(function () { console.log('Reply sent!'); })
+        .error(function () {console.log('wtufuuuuu'); });
+    };
   })
 
 
@@ -113,12 +127,15 @@ var app = angular.module('alumnio', ['ngRoute'])
   })
 
   .controller('signUpController', function ($scope, mainFactory, $location) {
-    // Toggle between forms //
     $scope.step2 = false;
     $scope.step1Submit = function () { $scope.step2 = true; };
 
 
     $scope.signUpUser = function () {
+      $scope.firstname = $scope.firstname.toLowerCase();
+      $scope.lastname = $scope.lastname.toLowerCase();
+      $scope.firstname = $scope.firstname[0].toUpperCase() + $scope.firstname.substr(1);
+      $scope.lastname = $scope.lastname[0].toUpperCase() + $scope.lastname.substr(1);
       var userData = { 
         email: $scope.email, 
         password: $scope.password, 

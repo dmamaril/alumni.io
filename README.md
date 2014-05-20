@@ -1,21 +1,9 @@
 ***** TO DO ****** 
 
-- Add moment.js
-
 - Signup.html
   - company logos as backgroudn images
     - dynamic
   - create session on signup
-
-- Inbox.html
-  - complete reply functionality
-  - add date sent
-
-- Sign up
-  - upper case first letter of first & last names
-
-- styles.css
-  - edit positioning for footer
 
 - Account Update functionality
 
@@ -37,6 +25,12 @@
 5/20/2014
 - Moment & ng-time-relative
   - installed not yet working
+
+- Signup.html
+  - auto capitalize first letters
+
+- Inbox.html
+  - replies properly
 
 5/19/2014
 - Inbox
