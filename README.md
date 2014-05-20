@@ -1,12 +1,15 @@
 ***** TO DO ****** 
 
+- Add moment.js
+
 - Signup.html
   - company logos as backgroudn images
-    - banner style
+    - dynamic
   - create session on signup
 
 - Inbox.html
   - complete reply functionality
+  - add date sent
 
 - Sign up
   - upper case first letter of first & last names
@@ -30,6 +33,10 @@
 
 
 ***** CHANGE LOG ******
+
+5/20/2014
+- Moment & ng-time-relative
+  - installed not yet working
 
 5/19/2014
 - Inbox

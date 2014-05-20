@@ -1,6 +1,5 @@
 var app = angular.module('alumnio', ['ngRoute'])
 
-
   .config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptor');
   }])
@@ -67,7 +66,8 @@ var app = angular.module('alumnio', ['ngRoute'])
         _id: $scope.userId,
         name: $scope.fullname,
         message: $scope.msg,
-        from: $window.sessionStorage.user
+        from: $window.sessionStorage.user,
+        fromId: $window.sessionStorage._id
       };
       $scope.msg = 'Message Sent!';
       mainFactory.post(message, '/api/users')
@@ -78,6 +78,20 @@ var app = angular.module('alumnio', ['ngRoute'])
           console.log('wtufuuuu')
         })
     }
+  })
+
+
+  .controller('inboxController', function ($scope, $window, $location, mainFactory, messages) {
+    $scope.messages = messages.messages.reverse();
+    $scope.user = $window.sessionStorage.user; 
+    $scope.isEmpty = !$scope.messages.length;
+    $scope.toggleForm = true;
+
+    $scope.renderForm = function(fullname, id) {
+      console.log($scope.messages);
+      console.log($window.sessionStorage._id)
+    }
+
   })
 
 
@@ -124,13 +138,6 @@ var app = angular.module('alumnio', ['ngRoute'])
           console.log ('Err @ app.js signUpController :: Sign up failed.');
         });
     };
-  })
-
-  .controller('inboxController', function ($scope, $window, $location, mainFactory, messages) {
-    $scope.messages = messages.messages.reverse();
-    $scope.user = $window.sessionStorage.user; 
-    $scope.isEmpty = !$scope.messages.length;
-    console.log($scope.isEmpty);
   })
 
   .controller('logOutController', function ($scope, $location, $window) {

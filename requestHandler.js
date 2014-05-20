@@ -5,6 +5,7 @@ var db = require('./server');
 var express = require('express');
 var UserModel = require('./mongoose/Users');
 var jwt = require('jsonwebtoken');
+var moment = require('moment');
 
 var secret = 'Shaco is King of the jungle.'
 
@@ -64,10 +65,11 @@ exports.fetchUsers = function (req, res) {
 };
 
 exports.addMessage = function (req, res) {
-  var message = {from: req.body.from, message: req.body.message, fromId: req.body._id};
-  console.log(message, 'Sent to ' + req.body.name);
-  UserModel.update({ _id: req.body._id }, { $push: {messages: message} }, function () {});
-  res.send(req.body.message);
+  var message = {from: req.body.from, fromId: req.body.fromId, toId: req.body._id, message: req.body.message, sent: moment()};
+  console.log(message.toId, message.fromId);
+  // console.log(message, 'Sent to ' + req.body.name);
+  // UserModel.update({ _id: req.body._id }, { $push: {messages: message} }, function () {});
+  // res.send(req.body.message);
 };
 
 exports.fetchInbox = function (req, res) {
