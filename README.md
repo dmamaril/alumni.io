@@ -18,6 +18,10 @@
 ***** CHANGE LOG ******
 
 5/20/2014
+- Grunt
+  - configure grunt
+  - add .jshintrc
+
 - Main.html
   - background image changes dynamically
 
