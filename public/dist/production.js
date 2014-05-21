@@ -46395,8 +46395,10 @@ var app = angular.module('alumnio', ['ngRoute'])
             }
           },
           users: function (mainFactory) {
-            console.log('Checking for active session token...');
-            return mainFactory.get('/api/users').then(function (users) { return users.data; });
+            return mainFactory.get('/api/users')
+              .then(function (users) { 
+                return users.data; 
+              });
           }
         }
       })
@@ -46412,11 +46414,23 @@ var app = angular.module('alumnio', ['ngRoute'])
         controller: 'inboxController',
         templateUrl: '/templates/inbox.html',
         resolve: {
-          messages: function (mainFactory, $window) {
+          userData: function (mainFactory, $window) {
             return mainFactory.post({ _id: $window.sessionStorage._id }, '/api/inbox')
               .then(function (user) { 
-                return user.data
+                return user.data;
               })
+          }
+        }
+      })
+      .when('/account', {
+        controller: 'accountController',
+        templateUrl: '/templates/account.html',
+        resolve: {
+          userInfo: function (mainFactory, $window) {
+            return mainFactory.post({ _id: $window.sessionStorage._id}, '/api/inbox')
+              .then(function (user) {
+                return user.data;
+              });
           }
         }
       })
@@ -46462,8 +46476,33 @@ var app = angular.module('alumnio', ['ngRoute'])
     }
   })
 
-  .controller('inboxController', function ($scope, $window, $location, mainFactory, messages) {
-    $scope.messages = messages.messages.reverse();
+  .controller('accountController', function ($scope, mainFactory, userInfo) {
+    $scope.showEdit = false;
+
+    $scope.toggleEdit = function () {
+      $scope.showEdit = !$scope.showEdit;
+    };
+
+    $scope.user = {
+      _id: userInfo._id,
+      worksAt: userInfo.worksAt,
+      site: userInfo.site,
+      linkedIn: userInfo.linkedIn,
+      cohort: userInfo.cohort
+    };
+
+    $scope.saveEdit = function () {
+      $scope.toggleEdit();
+      mainFactory.post($scope.user, '/api/account')
+        .success(function () { console.log('User edits saved.'); })
+        .error(function () { console.log('error saving data'); })
+    }
+
+
+  })
+
+  .controller('inboxController', function ($scope, $window, $location, mainFactory, userData) {
+    $scope.messages = userData.messages.reverse();
     $scope.user = $window.sessionStorage.user; 
     $scope.isEmpty = !$scope.messages.length;
     $scope.toggleForm = false;
@@ -46495,14 +46534,17 @@ var app = angular.module('alumnio', ['ngRoute'])
     };
   })
 
-
   .controller('loginController', function ($scope, mainFactory, $location, $window, $rootScope) {
+
     $scope.logInUser = function () {
       mainFactory.post({ email: $scope.email, password: $scope.password }, '/login')
         .success(function (data) {
           $window.sessionStorage.token = data.token;
           $window.sessionStorage._id = data._id;
           $window.sessionStorage.user = data.user;
+
+          setTimeout(function () { delete $window.sessionStorage.token; }, 1200000);
+
           $location.path('/');
         })
         .error(function () {
@@ -46534,6 +46576,7 @@ var app = angular.module('alumnio', ['ngRoute'])
         linkedIn: $scope.linkedIn,
         site: $scope.site
       };
+
       mainFactory.post(userData, '/signup')
         .success(function () {
           console.log ('Sign Up Success!');
@@ -46559,24 +46602,18 @@ var app = angular.module('alumnio', ['ngRoute'])
     };
   })
 
-  .factory('mainFactory', function ($http) {
+  .factory('mainFactory', function ($http, $location) {
     return {
       get: function (path) {
         return $http.get(path)
-          .success(function (userData) {
-            return userData;
-          })
-          .error(function () {
-            throw 'Err @ app.js 134';
-          });
+          .success(function (userData) { return userData; })
+          .error(function () { throw 'Err @ app.js 134'; });
       },
       post: function (data, path) {
         return $http.post(path, data)
-          .success(function (users) {
-            console.log('Post Success!');
-          })
-          .error(function () {
-            throw 'Err @ app.js 143';
+          .success(function (users) { })
+          .error(function () { 
+            $location.path('/login'); 
           });
       }
     }
@@ -46586,20 +46623,14 @@ var app = angular.module('alumnio', ['ngRoute'])
     return {
       request: function (config) {
         config.headers = config.headers || {};
-        if ($window.sessionStorage.token) {
-          config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
-        }
+        if ($window.sessionStorage.token) { config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token; }
         return config;
       },
       response: function (response) {
-        if (response.status === 401) {
-          $location.path('/login');
-        }
+        if (response.status === 401) { $location.path('/login'); }
         return response || $q.when(response); 
       },
-      login: function () {
-        $location.path('/login');
-      }
+      login: function () { $location.path('/login'); }
     }
   })
 
