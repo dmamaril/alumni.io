@@ -116,8 +116,8 @@ var app = angular.module('alumnio', ['ngRoute'])
       $scope.toggleEdit();
       mainFactory.post($scope.user, '/api/account')
         .success(function () { console.log('User edits saved.'); })
-        .error(function () { console.log('error saving data'); })
-    }
+        .error(function () { console.log('Error saving data'); })
+    };
 
 
   })
