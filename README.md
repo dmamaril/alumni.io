@@ -1,5 +1,4 @@
 ***** TO DO ****** 
-- Account Update functionality
 
 ***** EXTRA CREDIT ***** 
 - Main.html
@@ -14,6 +13,10 @@
 ***** CHANGE LOG ******
 
 5/20/2014
+- Account.html
+  - Add account change updates
+  - add template for account.html
+
 - General code cleanup
 
 - Grunt
